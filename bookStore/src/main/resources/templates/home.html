@@ -1,56 +1,74 @@
 <!doctype html>
-<html lang="en" xmlns:th="https://www.thymeleaf.com">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Book Store</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<title>Book Store</title>
 </head>
+
 <body>
 
+	<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand text-white" href="/">Book Store</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#">Book Store</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="available_books">Available Books</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="my_books">My Books</a>
-                </li>
-            </ul>
-            <div>
-                <a class="nav-link text-white" href="book_register">New Book Register</a>
-            </div>
-        </div>
-    </div>
-</nav>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<!-- Left menu -->
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link text-white" href="/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-white" href="/available_books">Available Books</a>
+					</li>
+					<li class="nav-item" th:if="${session.user != null and session.user.role == 'USER'}">
+						<a class="nav-link text-white" href="/my_books">My Books</a>
+					</li>
+				</ul>
 
-<div class="container text-center my-5">
-    <h1>WELCOME TO NEW BOOK STORE</h1>
-    <h6 style="text-align: justify; padding: 10px;line-height: 1.8;">
-        Welcome to our new book store! We are delighted to offer you a world filled with stories, knowledge, and inspiration. 
-        From timeless classics to the latest bestsellers, our shelves are stocked with books for readers of all ages and interests. 
-        Whether you're a student, a casual reader, or a passionate book lover, you’ll find something special here. 
-        Our cozy reading corners and friendly staff are here to make your visit enjoyable. 
-        Step in and explore — <span style="color: #d35400; font-weight: bold;"><center>your next favorite book is waiting for you!</center></span>
-    </h6>
-    <img src="img.png" width="360px"/>
-</div>
+				<!-- Right menu -->
+				<ul class="navbar-nav">
+					<li class="nav-item" th:if="${session.user != null and session.user.role == 'ADMIN'}">
+						<a class="nav-link text-white" href="/book_register">New Book Register</a>
+					</li>
+					<li class="nav-item" th:if="${session.user == null}">
+						<a class="nav-link text-white" href="/login">Login</a>
+					</li>
+					<li class="nav-item" th:if="${session.user != null}">
+						<a class="nav-link text-white" href="/logout">Logout</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
+	<!-- Home content -->
+	<div class="container text-center my-5">
+		<h1>WELCOME TO NEW BOOK STORE</h1>
+		<h6 style="text-align: justify; padding: 10px; line-height: 1.8;">
+			Welcome to our new book store! We are delighted to offer you a world filled with stories, knowledge, and
+			inspiration.
+			From timeless classics to the latest bestsellers, our shelves are stocked with books for readers of all ages
+			and interests.
+			Whether you're a student, a casual reader, or a passionate book lover, you’ll find something special here.
+			Our cozy reading corners and friendly staff are here to make your visit enjoyable.
+			Step in and explore —
+			<span style="color: #d35400; font-weight: bold;">
+				<center>your next favorite book is waiting for you!</center>
+			</span>
+		</h6>
+		<img src="img.png" width="360px" />
+	</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+	<!-- Bootstrap Scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

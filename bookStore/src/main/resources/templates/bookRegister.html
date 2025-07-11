@@ -29,9 +29,18 @@
 						aria-current="page" href="/">Home</a></li>
 					<li class="nav-item"><a class="nav-link text-white"
 						href="available_books">Available Books</a></li>
-					<li class="nav-item"><a class="nav-link text-white" href="my_books">My
-							Books</a></li>
+						<li class="nav-item" th:if="${session.user != null and session.user.role == 'USER'}">
+												<a class="nav-link text-white" href="/my_books">My Books</a>
+											</li>
 				</ul>
+				<ul class="navbar-nav">
+									<li class="nav-item" th:if="${session.user == null}">
+										<a class="nav-link text-white" href="/login">Login</a>
+									</li>
+									<li class="nav-item" th:if="${session.user != null}">
+										<a class="nav-link text-white" href="/logout">Logout</a>
+									</li>
+								</ul>
 				<div>
 					<a class="nav-link text-white" href="book_register">New Book
 						Register</a>
