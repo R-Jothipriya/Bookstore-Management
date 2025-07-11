@@ -17,7 +17,7 @@ It allows users to register new books, view available books, and manage their pe
 
 ## 🛠️ Technologies Used
 
-- Java 17+  
+- Java 21  
 - Spring Boot  
 - Spring Data JPA  
 - Thymeleaf  
